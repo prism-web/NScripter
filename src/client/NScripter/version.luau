@@ -1,0 +1,5 @@
+return {
+	VER_NUMBER = "2025608-en",
+	ONS_VERSION = "2025608-en",
+	NSC_VERSION = 294,
+}
