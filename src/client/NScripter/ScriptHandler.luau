@@ -1,9 +1,20 @@
 local h = require(script.Parent["ScriptHandler.h"])
+local STRING_BUFFER_LENGTH = 2048
 local ScriptHandler = {}
 
-local STRING_BUFFER_LENGTH = 2048
+setmetatable(ScriptHandler, {
+	__call = function()
+		print("hi")
+	end,
+}) -- fuck this ill fix it in the next commit
 
--- SKIP_SPACE here
+function SKIP_SPACE(s: string)
+	local p = 1
+	while s[p] == " " or s[p] == "\t" do
+		p += 1
+	end
+	return s:sub(p, s:len())
+end
 
 function ScriptHandler.readToken(check_pretext: boolean): string
 	h.current_script = h.next_script
@@ -25,9 +36,14 @@ function ScriptHandler.readToken(check_pretext: boolean): string
 			h.rgosub_wait_pos[h.num_rgosub_waits + 1] = buf
 			h.current_cmd_type = h.enum.CMD_TEXT
 			if not h.rgosub_1byte_mode then
+				buf = SKIP_SPACE(buf)
 			end
 		end
+	else
+		buf = SKIP_SPACE(buf)
 	end
+
+	-- continuing from this point
 end
 
 function ScriptHandler.addStringBuffer(ch: string)

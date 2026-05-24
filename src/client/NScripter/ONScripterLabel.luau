@@ -4,7 +4,7 @@ local ONScripterLabel = {}
 
 function ONScripterLabel.executeLabel()
 	local last_token_line = -1
-	local restart_return = 0
+	local _restart_return = 0
 
 	while ScriptParser_h.current_line < ScriptParser_h.current_label_info.num_of_lines do
 		print(script_h.getStringBuffer()[0])
@@ -18,6 +18,12 @@ function ONScripterLabel.executeLabel()
 
 	last_token_line = -1
 end
+
+function ONScripterLabel.init()
+	ONScripterLabel.readToken()
+end
+
+function ONScripterLabel.readToken() end
 
 -- todo: make init because you actually forgot theres something before executelabel you dumbass
 
